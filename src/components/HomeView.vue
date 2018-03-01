@@ -4,8 +4,12 @@
       <div class="mdl-cell mdl-cell--3-col mdl-cell mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
         <div v-for="picture in this.getCats()" class="image-card" @click="displayDetails(picture['.key'])">
+          <div class="top-bar">
+            <span @click.prevent="deletePicture(picture['.key'])">X</span>
+          </div>
           <div class="image-card__picture">
             <img :src="picture.url"/>
+
           </div>
           <div class="image-card__comment mdl-card__actions">
             <span>{{ picture.comment }}</span>
@@ -29,6 +33,10 @@
     methods: {
       displayDetails (id) {
         this.$router.push({name: 'detail', params: {id: id}})
+      },
+
+      deletePicture (id) {
+        alert(id)
       },
 
       getCats () {
@@ -98,4 +106,18 @@
     font-weight: bold;
   }
 
+  .top-bar {
+    position: absolute;
+    top: 0;
+    height: 25px;
+    padding: 16px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.5)
+  }
+
+  .top-bar > span {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+  }
 </style>
